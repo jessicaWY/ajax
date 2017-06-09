@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <title>
+        Document</title>
+    <script>
+        window.onload=function(){
+            var oBtn=document.getElementById('btn');
+            oBtn.onclick=function(){
+                var xhr=null;
+                /*if(window.XMLHttpRequest){
+                    xhr=new XMLHttpRequest();
+                }else{
+                    xhr=new ActiveXOject('MicrosoftXMLHTTP');
+                }*/
+
+                try{
+                    xhr=new XMLHttpRequest();
+                }catch (e){
+                    xhr=new ActiveOBject('MicrosoftXMLHTTP');
+                }
+                xhr.open('get','1.txt',true);
+                xhr.send();
+
+                alert(xhr.responseText);//当open第三个参数为true时弹出为空，即为异步，当为false时可以弹出数据，即为同步
+
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState==4&&xhr.status==200){
+                        alert(xhr.responseText);
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="button"
+       id="btn" value="按钮">
+</body>
+</html>

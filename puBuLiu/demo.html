@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <title>
+        Document</title>
+    <style>
+        body{
+            margin:0;
+        }
+        #ul{
+            width:1060px;
+            margin:10px auto;
+        }
+        li{
+            width:247px;
+            height:auto;
+            list-style: none;
+            margin-right:10px;
+            float:left;
+        }
+        li div img{
+            width:220px;
+            display: block;
+        }
+        li div{
+            border:1px #ddd solid;
+            padding:10px;
+            margin-bottom:10px;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul">
+    <li>
+        <!--<div>
+            <img src="img/1.jpg"
+                 alt="">
+            <p>夏季新款韩版宽松学生百搭打底衫纯棉字母印花黄色短袖T恤女</p>
+        </div>-->
+    </li>
+    <li>
+        <!--<div>
+            <img src="img/1.jpg"
+                 alt="">
+            <p>夏季新款韩版宽松学生百搭打底衫纯棉字母印花黄色短袖T恤女</p>
+        </div>-->
+    </li>
+    <li>
+        <!--<div>
+            <img src="img/1.jpg"
+                 alt="">
+            <p>夏季新款韩版宽松学生百搭打底衫纯棉字母印花黄色短袖T恤女</p>
+        </div>-->
+    </li>
+    <li>
+        <!--<div>
+            <img src="img/1.jpg"
+                 alt="">
+            <p>夏季新款韩版宽松学生百搭打底衫纯棉字母印花黄色短袖T恤女</p>
+        </div>-->
+    </li>
+</ul>
+<script src="../ajax.js"></script>
+<script>
+    window.onload=function(){
+        var oUl=document.getElementById('ul');
+        var aLi=oUl.getElementsByTagName('li');
+        var n=1;
+
+
+
+        ajax({
+            method:'get',
+            url:'getPic.php',
+            data:'cpage=1',
+            sucess:function(data){
+                var data=JSON.parse(data);
+                var len=data.length;
+                var oBtn=true;
+                for(var i=0;i<len;i++){
+                    var oDiv=document.createElement('div');
+                    var oImg=document.createElement('img');
+                    oImg.src=data[i].image;
+                    oImg.height=data[i].height*(225/data[i].width);
+                    oDiv.appendChild(oImg);
+                    var oP=document.createElement('p');
+                    oP.innerHTML=data[i].title;
+                    oDiv.appendChild(oP);
+                    getShort().appendChild(oDiv);
+                }
+            }
+        })
+
+        window.onscroll=function(){
+            var shortLi=getShort();
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            var clientHeight=document.documentElement.clientHeight||document.body.clientHeight;
+            if(getTop(shortLi)+shortLi.offsetHeight<=scrollTop+clientHeight){
+                n++;
+                ajax({
+                    method:'get',
+                    url:'getPic.php',
+                    data:'cpage='+n,
+                    sucess:function(data){
+                        var data=JSON.parse(data);
+                        var len=data.length;
+                        var oBtn=true;
+                        for(var i=0;i<len;i++){
+                            var oDiv=document.createElement('div');
+                            var oImg=document.createElement('img');
+                            oImg.src=data[i].image;
+                            oImg.height=data[i].height*(225/data[i].width);
+                            oDiv.appendChild(oImg);
+                            var oP=document.createElement('p');
+                            oP.innerHTML=data[i].title;
+                            oDiv.appendChild(oP);
+                            getShort().appendChild(oDiv);
+                        }
+                    }
+                })
+
+            }
+        }
+
+        function getShort(){
+            var oShort=aLi[0];
+            for(var i=1;i<aLi.length;i++){
+                if(oShort.offsetHeight>aLi[i].offsetHeight){
+                    oShort=aLi[i];
+                }
+            }
+            return oShort;
+        }
+
+        function getTop(obj){
+            var iTop=0;
+            while(obj){console.log(iTop);
+                iTop+=obj.offsetTop;
+                obj=obj.offsetParent;
+            }
+            return iTop;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <title>
+        Document</title>
+    <script>
+        window.onload=function(){
+            /*表单：
+            * action:数据提交的地址，默认为当前页面
+            * method:数据提交的方式，默认是get方法
+            * 1.get 把数据名称和数据对应的值用'='号连接，如果有多个数据，多个数据之间用'&'符号连接；然后把数据放到'URL？'后面传到指定页面  我们不能通过get传递太多的数据
+            * 2.post  理论上无限制
+            * enctype:提交的数据格式,默认为application/x-ww-form-urlencoded
+            * */
+        }
+    </script>
+</head>
+<body>
+<form
+        action="1.get.php" enctype="application/x-www-form-urlencoded">
+    <input type="text" name="username">
+    <input type="text" name="age">
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

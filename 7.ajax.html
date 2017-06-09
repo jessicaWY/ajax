@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <title>
+        Document</title>
+    <script src="ajax.js"></script>
+</head>
+<body>
+<script>
+    //    JSON:（一个对象）ie8一下不支持
+    /*JSON
+     严格要求对象的key带双引号
+     alert(JSON);
+     stringify：把一个对象转化为一个字符串
+     parse:把字符串转化成相应的对象*/
+
+    /*window.onload=function(){
+        var
+            oUl=document.getElementById('ul');
+        var
+            oBtn=document.getElementById('btn');
+        oBtn.onclick=function(){
+            ajax('get','getNews.php',' ',function(data){
+                var data=JSON.parse(data);
+                var html='';
+                for(var i=0;i<data.length;i++){
+                    html+='<li><a href="#">'+data[i].title+'</a><span style="color:#ddd;margin-left:5px;">'+data[i].date+'</span></li>'
+                }
+                oUl.innerHTML=html;
+            })
+            setInterval(function(){
+                ajax('get','getNews.php',' ',function(data){
+                    var data=JSON.parse(data);
+                    var html='';
+                    for(var i=0;i<data.length;i++){
+                        html+='<li><a href="#">'+data[i].title+'</a><span style="color:#ddd;margin-left:5px;">'+data[i].date+'</span></li>'
+                    }
+                    oUl.innerHTML=html;
+                })
+            },2000)
+            }
+
+
+    }*/
+
+    window.onload=function(){
+        var
+            oUl=document.getElementById('ul');
+        var
+            oBtn=document.getElementById('btn');
+        oBtn.onclick=function(){
+            ajax({method:'get',url:'getNews.php',sucess:function(data){
+                var data=JSON.parse(data);
+                var html='';
+                for(var i=0;i<data.length;i++){
+                    html+='<li><a href="#">'+data[i].title+'</a><span style="color:#ddd;margin-left:5px;">'+data[i].date+'</span></li>'
+                }
+                oUl.innerHTML=html;
+            }});
+            setInterval(function(){
+                ajax({method:'get',url:'getNews.php',sucess:function(data){
+                    var data=JSON.parse(data);
+                    var html='';
+                    for(var i=0;i<data.length;i++){
+                        html+='<li><a href="#">'+data[i].title+'</a><span style="color:#ddd;margin-left:5px;">'+data[i].date+'</span></li>'
+                    }
+                    oUl.innerHTML=html;
+                }})
+            },2000)
+        }
+
+
+    }
+
+</script>
+<input type="button"
+       value="添加新闻"
+       id="btn">
+<ul id="ul"></ul>
+</body>
+</html>
