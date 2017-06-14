@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <title>
+        Document</title>
+</head>
+<body>
+<script src="ajax.js"></script>
+<script>
+    function fn(data){
+        alert(data);
+    }
+</script>
+<script src="http://api.douban.com/labs/bubbler/user/ahbei"></script>
+<script>
+    window.onload=function(){
+        //jsonp:json with padding
+        //1.script标签
+        //2.用这个标签加载资源是没有问题的
+
+        //在资源进来之前定义一个函数，这个函数接收一个参数（数据），函数里面用这个参数做一些事情，然后需要的的时候通过这个标签script加载对应远程文件资源，当远程文件资源被加载进来的时候，就会去执行我们当前定义好的函数，并且把数据当做函数的参数传入进去
+        ajax({
+            method:'get',
+            url:'http://api.douban.com/labs/bubbler/user/ahbei',
+            sucess:function(data){
+                alert(data);
+            }
+        })
+    }
+</script>
+</body>
+</html>
